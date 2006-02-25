@@ -2,7 +2,7 @@
  * @file   ole.c
  * @author Alex Ott, Victor B Wagner
  * @date   Wed Jun 11 12:33:01 2003
- * Version: $Id: ole.c,v 1.1 2006-02-24 17:44:06 vitus Exp $
+ * Version: $Id: ole.c,v 1.2 2006-02-25 15:28:14 vitus Exp $
  * Copyright: Victor B Wagner, 1996-2003 Alex Ott, 2003
  * 
  * @brief  Parsing structure of MS Office compound document
@@ -243,7 +243,7 @@ FILE* ole_init(FILE *f, void *buffer, size_t bufSize)  {
 	
 /* Find Root Entry */
 	while((tEntry=(oleEntry*)ole_readdir(newfile)) != NULL) {
-		if (!tEntry->name[0]||strcmp(tEntry->name,"Root Entry") == 0) {
+		if (tEntry->type == oleRootDir ) {
 			rootEntry=tEntry;
 			break;
 		}
@@ -252,8 +252,7 @@ FILE* ole_init(FILE *f, void *buffer, size_t bufSize)  {
 	propCurNumber = 0;
 	fseek(newfile, 0, SEEK_SET);
 	if (!rootEntry) {
-		fprintf(stderr,"Cannot find root entry in this file!\n");
-		ole_finish();
+		fprintf(stderr,"Broken OLE structure. Cannot find root entry in this file!\n");		ole_finish();
 		return NULL;
 	}	
 	return newfile;
