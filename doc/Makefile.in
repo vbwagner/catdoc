@@ -20,7 +20,7 @@ manext = @manext@
 all:
 	touch build
 
-dosdoc: catdoc.txt catdoc.ps xls2csv.txt xls2csv.ps catppt.txt catppt.txt
+dosdoc: catdoc.txt catdoc.ps xls2csv.txt xls2csv.ps catppt.txt catppt.ps
 clean:
 	rm build
 install: @installtargets@
