@@ -170,7 +170,7 @@ int process_file(FILE *f,long stop) {
 				 * else*/
 				buffer[++bufptr]=c;
 			}
-		} while (bufptr<PARAGRAPH_BUFFER-2 &&
+		} while (bufptr<=PARAGRAPH_BUFFER-2 &&
 				 !catdoc_eof(f) &&
 				 buffer[bufptr]!=0x000a);
 		if (bufptr>0) {
