@@ -171,7 +171,7 @@ int rtf_level=0;
 extern unsigned short int buffer[];
 void add_to_buffer(int *bufptr,unsigned short int c) {
 	buffer[++(*bufptr)]=c;
-	if (*bufptr > PARAGRAPH_BUFFER-2) {
+	if (*bufptr >= PARAGRAPH_BUFFER-2) {
 		buffer[++(*bufptr)]=0;
 		output_paragraph(buffer);
 		*bufptr=-1;
