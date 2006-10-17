@@ -261,8 +261,23 @@ int parse_rtf(FILE *f) {
 				if (data_skip_mode == 0)
 					add_to_buffer(&bufptr,com.numarg);
 				i=groups[group_count].uc;
-				while((--i)>0)
-					fgetc(f);
+				while((--i)>0) {
+					int c=fgetc(f);
+					if (c == '\\') {
+						c = fgetc(f);
+						switch (c) {
+						 case '\\': break;
+						 case '\'':
+						 	/* skip two hex digits */
+							fgetc(f);
+							fgetc(f);
+							break;
+						default:
+							break;
+						}
+					}		
+				}	
+					
 				break;
 			case RTF_PARA:
 				/*if (para_mode > 0) {*/
