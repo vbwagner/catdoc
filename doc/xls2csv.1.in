@@ -92,6 +92,7 @@ manual page for details,
 
 .BR cat (1),
 .BR catdoc (1),
+.BR catppt (1),
 .BR strings (1),
 .BR utf (4),
 .BR unicode (4)

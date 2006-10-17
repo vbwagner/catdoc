@@ -304,6 +304,7 @@ between empty table cell and end of table row.
 .SH "SEE ALSO"
 
 .BR xls2csv (1),
+.BR catppt (1),
 .BR cat (1),
 .BR strings (1),
 .BR utf (4),
