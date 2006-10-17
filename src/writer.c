@@ -54,12 +54,18 @@ void out_char(const char *chunk) {
 	} else if (bufpos>wrap_margin) {
 		char *q=outputbuffer,*p=outputbuffer+wrap_margin;
 		
-		while (p>outputbuffer&&!isspace(*p)) p--;
+		while (p>outputbuffer&&*p!=' '&& *p!='\t') p--;
 		if (p==outputbuffer) {
 			/*worst case - nowhere to wrap. Will use brute force */
-			fwrite(outputbuffer,wrap_margin,1,stdout);
+			int i = wrap_margin;
+			if (from_unicode == to_utf8) {
+				/* go back to start of nearest utf-8 character */
+				while(i>0 && (outputbuffer[i] & 0xC0) == 0x80) i--;
+			}			
+			fwrite(outputbuffer,i,1,stdout);
+
 			fputc('\n',stdout);
-			p=outputbuffer+wrap_margin;
+			p=outputbuffer+i;
 		} else {
 			*p=0;p++;
 			fputs(outputbuffer,stdout);
