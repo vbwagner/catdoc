@@ -2,7 +2,7 @@
  * @file   ppt2text.c
  * @author Alex Ott <alexott@gmail.com>
  * @date   23 ‰≈À 2004
- * Version: $Id: catppt.c,v 1.1 2006-02-24 17:44:06 vitus Exp $
+ * Version: $Id: catppt.c,v 1.2 2006-10-17 19:11:29 vitus Exp $
  * Copyright: Alex Ott 
  * 
  * @brief  main module for text extracting from .ppt
@@ -34,10 +34,10 @@
  * 
  */
 void help (void) {
-	printf("Usage:\n ppt2text [-lV] [-b string] [-s charset] [-d charset] files\n");
+	printf("Usage:\n catppt [-lV] [-b string] [-s charset] [-d charset] files\n");
 }
 
-
+extern char *slide_separator;
 char *input_buffer, *output_buffer;
 
 /** 
@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
 	
 	check_charset(&dest_csname,dest_csname); 
 
-	while ((c=getopt(argc,argv,"Vls:d:p:"))!=-1) {
+	while ((c=getopt(argc,argv,"Vls:d:b:"))!=-1) {
 		switch(c)  {
 		case 'l':
 			list_charsets(); exit(0);
@@ -80,6 +80,9 @@ int main(int argc, char *argv[]) {
 			break;
 		case 'd':
 			check_charset(&dest_csname,optarg);
+			break;
+		case 'b':
+			slide_separator = strdup(optarg);
 			break;
 		case 'V': printf("Catdoc Version %s\n",CATDOC_VERSION);
 			exit(0);
