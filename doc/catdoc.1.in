@@ -62,7 +62,7 @@ switch. In
 .I wide
 mode 
 .B  catdoc prints each paragraph as one long line, suitable for import into
-word processors which perform word wrapping theirselves.
+word processors that perform word wrapping.
  
 
 .SH OPTIONS
@@ -136,7 +136,7 @@ with  default charset,   try    this  option.
 .B -w
 disables word wrapping. By default 
 .B catdoc
-output is splitted into lines not longer than 72 (or  number, specified by
+output is split into lines not longer than 72 (or  number, specified by
 -m  option)   characters and paragraphs
 are separated by blank line. With this option each paragraph is one
 long line. 
