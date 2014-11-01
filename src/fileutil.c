@@ -71,13 +71,11 @@ char *find_file(char *name, const char *path)
 	char *q;
 	char path_buf[PATH_BUF_SIZE];
 	char dir_sep[2]={DIR_SEP,0};
-	for (p=path;p;p=q+1) {
+	for (p=path;p;p=(q?(q+1):NULL)) {
 		q=strchr(p,LIST_SEP);
-
 		if (q) {
 			if (!prepare_path_buf(path_buf,p,q)) continue;
 		} else {
-			q--;
 			if (!prepare_path_buf(path_buf,p,p+strlen(p))) continue;
 		}
 		strcat(path_buf,dir_sep); /* always one char */
@@ -186,9 +184,8 @@ void list_charsets(void) {
 	int count,glob_flags=GLOB_ERR;
 #endif
 	char **ptr;
-	for (p=charset_path;p;p=q+1) {
+	for (p=charset_path;p;p=(q?(q+1):NULL)) {
 		q=strchr(p,LIST_SEP);
-
 		if (q) {
 			if (q-p>=PATH_BUF_SIZE) {
 				/* Oops, dir name too long, perhabs broken config file */
@@ -197,7 +194,6 @@ void list_charsets(void) {
 			strncpy(path_buf,p,q-p);
 			path_buf[q-p]=0;
 		} else {
-			q--;
 			if (strlen(p)>=PATH_BUF_SIZE) continue;
 			strcpy(path_buf,p);
 		}
