@@ -37,7 +37,7 @@ long propCurNumber, propLen, propNumber, propStart;
 unsigned char *properties=NULL;
 long int fileLength=0;
 
-static unsigned char ole_sign[]={0xD0,0xCF,0x11,0xE0,0xA1,0xB1,0x1A,0xE1,0};
+static char ole_sign[]={0xD0,0xCF,0x11,0xE0,0xA1,0xB1,0x1A,0xE1,0};
 
 
 /** 
@@ -97,7 +97,7 @@ FILE* ole_init(FILE *f, void *buffer, size_t bufSize)  {
 	if ( ret != BBD_BLOCK_SIZE ) {
 		return NULL;
 	}
-	if (strncmp(oleBuf,ole_sign,8) != 0) {
+	if (strncmp((char *)&oleBuf,ole_sign,8) != 0) {
 		return NULL;
 	}
  	sectorSize = 1<<getshort(oleBuf,0x1e);

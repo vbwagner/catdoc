@@ -94,7 +94,7 @@ void print_value(unsigned char *value)
 			break;
 		case QUOTE_ALL_STRINGS:
 			{ char *endptr;
-			  strtod(value,&endptr);
+			  strtod((char *)value,&endptr);
 			  quotes=(*endptr != '0');
 			break;
 			}  

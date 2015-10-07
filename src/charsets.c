@@ -163,7 +163,7 @@ int get_utf16msb (FILE *f,long *offset,long fileend) {
 
 int get_utf8 (FILE *f,long *offset,long fileend) {
 	unsigned char buf[3];
-	int d,c;
+	int c;
     int result;
 	result=catdoc_read(buf, 1, 1, f);
 	if (result<0) {
@@ -172,7 +172,6 @@ int get_utf8 (FILE *f,long *offset,long fileend) {
 	}	
 	if (result==0) return EOF;
 	c=buf[0];
-	d=0;
 	if (c<0x80) 
 		return c;
 	if (c <0xC0) 

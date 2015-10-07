@@ -39,18 +39,18 @@ int analyze_format(FILE *f) {
 	}
 	catdoc_read(buffer,4,1,f);
 	buffer[4]=0;
-	if (strncmp(buffer,write_sign,2)==0) {
+	if (strncmp((char *)&buffer,write_sign,2)==0) {
 		printf("[Windows Write file. Some garbage expected]\n");
 		get_unicode_char=get_8bit_char;
 		return process_file(f,LONG_MAX);
-	} else if (strncmp(buffer,rtf_sign,4)==0) {
+	} else if (strncmp((char *)&buffer,rtf_sign,4)==0) {
 		return parse_rtf(f);
-	} else if (strncmp(buffer,old_word_sign,2)==0) {
+	} else if (strncmp((char *)&buffer,old_word_sign,2)==0) {
 	   fread(buffer+4,1,124,f);	
 	   return parse_word_header(buffer,f,128,0);
 	}	
 	fread(buffer+4,1,4,f);
-	if (strncmp(buffer,ole_sign,8)==0) {
+	if (strncmp((char *)&buffer,ole_sign,8)==0) {
 		if ((new_file=ole_init(f, buffer, 8)) != NULL) {
 			set_ole_func();
 			while((ole_file=ole_readdir(new_file)) != NULL) {
@@ -70,8 +70,8 @@ int analyze_format(FILE *f) {
 			exit(1);
 		}	
 	} else {
-		set_std_func();
-		copy_out(f,buffer);
+
+		copy_out(f,(char *)&buffer);
 		return 0;
 	}
 	

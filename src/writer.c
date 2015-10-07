@@ -58,7 +58,8 @@ void out_char(const char *chunk) {
 		if (p==outputbuffer) {
 			/*worst case - nowhere to wrap. Will use brute force */
 			int i = wrap_margin;
-			if (from_unicode == to_utf8) {
+			if (target_charset == NULL) {
+				/* NULL target_charest means UTF-8 */
 				/* go back to start of nearest utf-8 character */
 				while(i>0 && (outputbuffer[i] & 0xC0) == 0x80) i--;
 			}			

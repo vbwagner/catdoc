@@ -84,7 +84,7 @@ void do_ppt(FILE *input,char *filename) {
  */
 static void process_item (int rectype, long reclen, FILE* input) {
 	int i=0, u;
-	static char buf[2];
+	static unsigned char buf[2];
 /*	fprintf(stderr,"Processing record %d length %d\n",rectype,reclen);
  *	*/
 	switch(rectype) {

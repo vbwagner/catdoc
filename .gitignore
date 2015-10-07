@@ -9,7 +9,16 @@ autom4te.cache
 config.cache
 config.log
 config.status
+config.h
+tags
+*.o
 rtf-parser.txt
 semantic.cache
 tests
+doc/build
+doc/*.1
 {arch}
+src/catdoc
+src/catppt
+src/xls2csv
+src/wordview
