@@ -88,7 +88,7 @@ int main(int argc, char **argv) {
 				break;
 			case 'm': {
 						  char *endptr;
-						  wrap_margin = strtol(optarg,&endptr,0);
+						  wrap_margin = (int)strtol(optarg,&endptr,0);
 						  if (*endptr) {
 							  fprintf(stderr,"Invalid wrap margin value `%s'\n",optarg);
 							  exit(1);

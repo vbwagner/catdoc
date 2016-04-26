@@ -31,9 +31,9 @@ void copy_out (FILE *f,char *header) {
 		 */
 		if ((unsigned char)header[0]==0xFE && (unsigned char)header[1]==0xFF) {
 			get_unicode_char = get_utf16msb;
-			fputs(convert_char(header[2]<<8|header[3]),stdout); 
-			fputs(convert_char(header[4]<<8|header[5]),stdout); 
-			fputs(convert_char(header[6]<<8|header[7]),stdout); 
+			fputs(convert_char((header[2]<<8)|header[3]),stdout); 
+			fputs(convert_char((header[4]<<8)|header[5]),stdout); 
+			fputs(convert_char((header[6]<<8)|header[7]),stdout); 
 		} else if ((unsigned char)header[0]!=0xFF ||
 				(unsigned char)header[1]!=0xFE) {
 			int c,j,d;
@@ -57,16 +57,16 @@ void copy_out (FILE *f,char *header) {
 						} else {
 							d=fgetc(f);
 						}
-						c=c<<6 | (d & 0x3F);
+						c=(c<<6) | (d & 0x3F);
 					}
 				}
 				fputs (convert_char(c),stdout);
 			}
 		} else {
 			get_unicode_char = get_utf16lsb;
-			fputs(convert_char(header[3]<<8|header[2]),stdout); 
-			fputs(convert_char(header[5]<<8|header[4]),stdout); 
-			fputs(convert_char(header[7]<<8|header[6]),stdout); 
+			fputs(convert_char((header[3]<<8)|header[2]),stdout); 
+			fputs(convert_char((header[5]<<8)|header[4]),stdout); 
+			fputs(convert_char((header[7]<<8)|header[6]),stdout); 
 		}	    
 		while (!catdoc_eof(f)) {
 			i=get_unicode_char(f,&offset,0x7FFFFFFF); 
