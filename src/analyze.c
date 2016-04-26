@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "catdoc.h"
-char ole_sign[]={0xD0,0xCF,0x11,0xE0,0xA1,0xB1,0x1A,0xE1,0};
+extern char ole_sign[], zip_sign[]; /* from ole.c */
 char rtf_sign[]="{\\rtf";
 char old_word_sign[]={0xdb,0xa5,0};
 char write_sign[]={0x31,0xBE,0};
@@ -45,6 +45,10 @@ int analyze_format(FILE *f) {
 		return process_file(f,LONG_MAX);
 	} else if (strncmp((char *)&buffer,rtf_sign,4)==0) {
 		return parse_rtf(f);
+	} else if (strncmp((char *)&buffer, zip_sign,4) == 0) {
+		fprintf(stderr,"This file looks like ZIP archive or Office 2007 "
+		"or later file.\nNot supported by catdoc\n");
+		exit(1);
 	} else if (strncmp((char *)&buffer,old_word_sign,2)==0) {
 	   fread(buffer+4,1,124,f);	
 	   return parse_word_header(buffer,f,128,0);

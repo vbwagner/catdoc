@@ -37,8 +37,8 @@ long propCurNumber, propLen, propNumber, propStart;
 unsigned char *properties=NULL;
 long int fileLength=0;
 
-static char ole_sign[]={0xD0,0xCF,0x11,0xE0,0xA1,0xB1,0x1A,0xE1,0};
-
+char ole_sign[]={0xD0,0xCF,0x11,0xE0,0xA1,0xB1,0x1A,0xE1,0};
+char zip_sign[]="PK\003\004";
 
 /** 
  * Initializes ole structure
@@ -97,7 +97,10 @@ FILE* ole_init(FILE *f, void *buffer, size_t bufSize)  {
 	if ( ret != BBD_BLOCK_SIZE ) {
 		return NULL;
 	}
-	if (strncmp((char *)&oleBuf,ole_sign,8) != 0) {
+	if (strncmp((char *)&oleBuf,zip_sign,4) == 0) {
+		fprintf(stderr,"Looks like ZIP archive or Office 2007 or later. Not supported\n");
+		return NULL;
+	} else if (strncmp((char *)&oleBuf,ole_sign,8) != 0) {
 		return NULL;
 	}
  	sectorSize = 1<<getshort(oleBuf,0x1e);
