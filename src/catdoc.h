@@ -168,14 +168,14 @@ extern  int wrap_margin;
 /* Structure to store UNICODE -> target charset mappings */
 /* array of 256 pointers (which may be null) to arrays of 256 short ints
    which contain 8-bit character codes or -1 if no matching char */
-typedef short int  ** CHARSET;
+typedef int16_t  ** CHARSET;
 
 /* structure to store multicharacter substitution mapping */
 /* Array of 256 pointers to arrays of 256 pointers to string */
 /* configuration variables defined in catdoc.c */
 typedef char *** SUBSTMAP;
 
-extern short int *source_charset;
+extern uint16_t *source_charset;
 extern char bad_char[]; /* defines one-symbol string to replace unknown unicode chars */
 extern char *source_csname;
 extern char *dest_csname;

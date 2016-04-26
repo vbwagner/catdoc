@@ -14,7 +14,7 @@
 
 char *charset_path=CHARSETPATH;
 char *source_csname=SOURCE_CHARSET, *dest_csname=TARGET_CHARSET;
-short int * source_charset;
+uint16_t * source_charset;
 int unknown_as_hex=0;
 char bad_char[]=UNKNOWN_CHAR;
 CHARSET target_charset;
