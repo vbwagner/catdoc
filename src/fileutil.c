@@ -104,10 +104,14 @@ int check_charset(char **filename,const char *charset) {
 		return 1;
 	}   
 	tmppath=find_file(stradd(charset,CHARSET_EXT),charset_path);
-	if (tmppath&& *tmppath) {
-		*filename=strdup(charset);
-		free(tmppath);
-		return 1;
+	/* Some compilers evalate both arguments of && before
+	   applying, so let's not use && as in the shell */
+	if (tmppath) {
+	    if (*tmppath) {
+			*filename=strdup(charset);
+			free(tmppath);
+			return 1;
+		}
 	}
 	return 0;
 }

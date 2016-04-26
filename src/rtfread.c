@@ -103,6 +103,7 @@ RTFTypeMap rtf_types[]={
 
 #define RTFNAMEMAXLEN 32
 #define RTFARGSMAXLEN 64
+#define MAX_DIGITS_IN_NUMBER 10
 
 /**
  * Structure describing rtf command
@@ -367,9 +368,11 @@ signed long getNumber(FILE *f) {
 	int c,count=0;
 	char buf[RTFARGSMAXLEN];
 	
-	while(isdigit(c=fgetc(f)) || c=='-') {
+	while((isdigit(c=fgetc(f)) || c=='-')) {
 		if(feof(f))
 			return -1;
+		if (count > MAX_DIGITS_IN_NUMBER) 
+			break;
 		buf[count++]=(char)c;
 	}
 	ungetc(c,f);
