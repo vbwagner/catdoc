@@ -125,7 +125,11 @@ FILE* ole_init(FILE *f, void *buffer, size_t bufSize)  {
 	memcpy(tmpBuf,oleBuf+0x4c,MSAT_ORIG_SIZE);
 	mblock=getlong(oleBuf,0x44);
 	msat_size=getlong(oleBuf,0x48);
-	if (msat_size * sectorSize)
+	if (msat_size * sectorSize > fileLength) {
+		free(tmpBuf);
+		return NULL;
+	}
+		
 /* 	fprintf(stderr, "msat_size=%ld\n", msat_size); */
 
 	i=0;
