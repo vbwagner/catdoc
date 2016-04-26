@@ -34,7 +34,9 @@ unsigned char **allocate (int row,int col) {
 	}
 	if (col>=rowptr[row].end) {
 		newcol=(col/16+1)*16;
-		rowptr[row].cells=realloc(rowptr[row].cells,newcol*sizeof(char *));
+		rowptr[row].cells=
+		   (unsigned char**)realloc(rowptr[row].cells,
+		                            newcol*sizeof(unsigned char *));
 		if (rowptr[row].cells == NULL) {
 			perror("allocating row");
 			exit(1);

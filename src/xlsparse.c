@@ -49,11 +49,13 @@ void do_table(FILE *input,char *filename) {
 			if (reclen==8 || reclen==16) {
 				if (biff_version == 0x0809 ) {
 					itemsread=catdoc_read(rec,4,1,input);
+					if (itemsread == 0) 
+						break;
 					build_year=getshort(rec+2,0);
 					build_rel=getshort(rec,0);
 					(void) build_rel;
 					if(build_year > 5 ) {
-						itemsread=catdoc_read(rec,8,1,input);
+						catdoc_read(rec,8,1,input);
 						biff_version=8;
 						offset=12;
 					}
@@ -86,19 +88,20 @@ void do_table(FILE *input,char *filename) {
 	}    
 	while(itemsread){
 		unsigned char buffer[2];
-		rectype = 0;
+
 		itemsread = catdoc_read(buffer, 2, 1, input);
 		if (catdoc_eof(input)) {
 			process_item(MSEOF,0,NULL);
 			return;
 		}
 		
-		rectype=getshort(buffer,0);
 		if(itemsread == 0)
 			break;
-		reclen=0;
 
+		rectype=getshort(buffer,0);
 		itemsread = catdoc_read(buffer, 2, 1, input);
+		if(itemsread == 0)
+			break;
 		reclen=getshort(buffer,0);
 		if (reclen && reclen <MAX_MS_RECSIZE &&reclen >0){
 			itemsread = catdoc_read(rec, 1, reclen, input);
@@ -440,7 +443,6 @@ unsigned char *copy_unicode_string (unsigned char **src) {
 		count=**src;
 		flags = *(*src+offset);
 		offset --;
-		flags = *(*src+1+offset);
 		if (! ( flags == 0 || flags == 1 || flags == 8 || flags == 9 ||
 						flags == 4 || flags == 5 || flags == 0x0c || flags == 0x0d ) ) {
 			/* 			fprintf(stderr,"Strange flags = %d, returning NULL\n", flags); */
@@ -520,7 +522,6 @@ unsigned char *copy_unicode_string (unsigned char **src) {
 			}
 			d=dest+l;
 			strcpy((char *)d,(char *)c);
-			d+=dl;
 			l+=dl;
 		}      
 	}
@@ -761,7 +762,7 @@ void parse_sst(unsigned char *sstbuf,int bufsize) {
 	unsigned char **parsedString;/*pointer into parsed array*/ 
 			
 	sstsize = getlong(sstbuf+4,0);
-	sst=malloc(sstsize*sizeof(char *));
+	sst=(unsigned char **)malloc(sstsize*sizeof(unsigned char *));
 	
 	if (sst == NULL) {
 		perror("SST allocation error");

@@ -180,14 +180,16 @@ void list_charsets(void) {
 	char *q;
 	char path_buf[PATH_BUF_SIZE];
 	char dir_sep[2]={DIR_SEP,0};
+	char **ptr;
 #ifdef __MSDOS__
 	struct ffblk ffblock;
 	int res,col;
 #else
 	glob_t glob_buf;
 	int count,glob_flags=GLOB_ERR;
+
+	memset(&glob_buf,0,sizeof(glob_t));
 #endif
-	char **ptr;
 	for (p=charset_path;p;p=(q?(q+1):NULL)) {
 		q=strchr(p,LIST_SEP);
 		if (q) {

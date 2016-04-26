@@ -328,6 +328,7 @@ FILE *ole_readdir(FILE *f) {
 		(e->startBlock <=
 		 fileLength/(e->isBigBlock ? sectorSize : shortSectorSize))) {
 		if((e->blocks=malloc(chainMaxLen*sizeof(long int))) == NULL ) {
+			free(e);
 			return NULL;
 		}
 		while(1) {

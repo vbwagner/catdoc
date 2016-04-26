@@ -46,13 +46,14 @@ CHARSET make_reverse_map(short int *charset) {
 	int i,j,k,l;
 	short int *p;   
 	if (! charset) {
+		free(newmap);
 		return NULL;
 	}	
 	for (i=0;i<256;i++) {
 		k= charset[i];
 		j=  (unsigned)k>>8;
 		if (!newmap[j]) {
-			newmap[j] = malloc(sizeof(short int *)*256);
+			newmap[j] = (short int *)malloc(sizeof(short int)*256);
 			if (!newmap[j]) {
 				fprintf(stderr,"Insufficient memory for  charset\n");
 				exit(1);
@@ -72,7 +73,7 @@ CHARSET make_reverse_map(short int *charset) {
 short int * read_charset(const char *filename) {
 	char *path;
 	FILE *f;
-	short int *new=calloc(sizeof(short int),256);
+	short int *new;
 	int c;
 	long int uc;
 	path= find_file(stradd(filename,CHARSET_EXT),charset_path);
@@ -89,6 +90,7 @@ short int * read_charset(const char *filename) {
 	if (input_buffer)
 		setvbuf(f,input_buffer,_IOFBF,FILE_BUFFER);
 	/* defaults */
+	new = calloc(sizeof(short int),256);
 	for (c=0;c<32;c++) {
 		new[c]=c;
 	}
