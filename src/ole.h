@@ -16,7 +16,7 @@
 #define BBD_BLOCK_SIZE     512
 #define SBD_BLOCK_SIZE      64
 #define PROP_BLOCK_SIZE    128
-#define OLENAMELENGHT       32
+#define OLENAMELENGTH       32
 #define MSAT_ORIG_SIZE     436
 
 typedef enum {
@@ -28,7 +28,7 @@ typedef enum {
 
 typedef struct {
 	FILE *file;
-	char name[OLENAMELENGHT+1];
+	char name[OLENAMELENGTH+1];
 	long int startBlock;
 	long int curBlock;
 	unsigned long int length;

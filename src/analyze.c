@@ -70,7 +70,7 @@ int analyze_format(FILE *f) {
 			set_std_func();
 			ole_finish();
 		} else {
-			fprintf(stderr,"Broken OLE file. Try using -b switch");
+			fprintf(stderr,"Broken OLE file. Try using -b switch\n");
 			exit(1);
 		}	
 	} else {
