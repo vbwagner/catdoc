@@ -12,6 +12,7 @@ bindir = @bindir@
 libdir = @libdir@
 confdir = @sysconfdir@
 datadir = @datadir@
+datarootdir = @datarootdir@
 mandir = @mandir@
 INSTALL = @INSTALL@
 WISH = @WISH@
@@ -22,7 +23,7 @@ install_targets = @installtargets@
 CHARSETPATH=${datadir}/catdoc
 # Flags to pass to your C compilier
 # remove -O2 on HP/UX 9. It is known to cause problems
-FLAGS=-I. @CFLAGS@  @DEFS@ -DCATDOC_VERSION=\"@catdoc_version@\" -DCHARSETPATH=\"${CHARSETPATH}\"
+FLAGS=-I. @CFLAGS@  @DEFS@ -DCATDOC_VERSION=\"@PACKAGE_VERSION@\" -DCHARSETPATH=\"${CHARSETPATH}\"
 
 #Compile-time configuration of catdoc itself. Edit according to taste
 
@@ -74,12 +75,12 @@ OBJPPT=catppt.o pptparse.o $(COMMONOBJ)
 #	$(CC) -c $(CFLAGS) $*
 all: @buildtargets@
 catdoc: $(OBJ)
-	$(CC)  -o catdoc  $(OBJ)
+	$(CC)  -o catdoc  $(OBJ) $(LDFLAGS)
 xls2csv: $(OBJXLS)
-	$(CC) -o xls2csv $(OBJXLS) -lm
+	$(CC) -o xls2csv $(OBJXLS) -lm $(LDFLAGS)
 
 catppt: $(OBJPPT)
-	$(CC) -o catppt $(OBJPPT) -lm
+	$(CC) -o catppt $(OBJPPT) -lm $(LDFLAGS)
 
 install: @installtargets@
 install-catdoc:catdoc xls2csv catppt 

@@ -11,6 +11,24 @@
 #include <config.h>
 #endif
 
+#ifdef HAVE_STDINT_H
+#include <stdint.h>
+#else
+/* If there is no stdint.h, lets define some common integer types
+ * ourselves */
+#define int16_t	short int
+#define uint16_t unsigned short int
+#ifdef __MSDOS__
+/* MS-DOS is only supported platform where int is 16-bit */
+#define int32_t  long int
+#define uint32_t unsigned long int
+#else
+#define int32_t int
+#define uint32_t unsigned int
+#endif
+#endif
+
+
 /* There is some strange thing on aix */
 #if (defined(_AIX)||defined(___AIX)) && !defined(__unix)
 # define __unix 1
@@ -230,7 +248,7 @@ extern char *input_buffer,*output_buffer;
 	char *strdup(const char *s);
 #endif
 /* numeric conversions */	
-long int getlong(unsigned char *buffer,int offset);
-unsigned long int getulong(unsigned char *buffer,int offset);
-unsigned int getshort(unsigned char *buffer,int offset);
+int32_t getlong(unsigned char *buffer,int offset);
+uint32_t getulong(unsigned char *buffer,int offset);
+uint16_t getshort(unsigned char *buffer,int offset);
 #endif

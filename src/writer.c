@@ -21,6 +21,9 @@
 /* charset.c                                                            */
 /************************************************************************/
 static char outputbuffer[LINE_BUF_SIZE]="";
+
+int para_double_newline = 1;
+
 void out_char(const char *chunk) {
 	static int bufpos=0;
 	int eol_flag=0;
@@ -34,7 +37,7 @@ void out_char(const char *chunk) {
 			*p;
 			*(q++)=*(p++),bufpos++) {
 			if (*p=='\n') eol_flag=1;
-	}		
+	}
 	*q=0;
 		 /* This strcat is safe. wrap margin setting
 							 code in main.c ensures that wrap_margin is 
@@ -46,11 +49,13 @@ void out_char(const char *chunk) {
 		fputs(outputbuffer,stdout);
 		*outputbuffer=0;
 		bufpos=0;
-		if (q) {
-			 fputs(q,stdout);
-		} else {
-			fputc('\n',stdout);
-		}	
+		if (para_double_newline) {
+			if (q) {
+				 fputs(q,stdout);
+			} else {
+				fputc('\n',stdout);
+			}
+		}
 	} else if (bufpos>wrap_margin) {
 		char *q=outputbuffer,*p=outputbuffer+wrap_margin;
 		

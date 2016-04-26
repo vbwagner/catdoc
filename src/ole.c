@@ -332,6 +332,23 @@ FILE *ole_readdir(FILE *f) {
 			return NULL;
 		}
 		while(1) {
+			if(chainCurrent < 0 ||
+			   chainCurrent >= (
+                               e->isBigBlock ?
+                               ((bbdNumBlocks*sectorSize)/4) :
+                               ((sbdNumber*shortSectorSize)/4)
+                               ) ||
+			   (e->numOfBlocks >
+				e->length/(
+                                    e->isBigBlock ?
+                                    sectorSize :
+                                    shortSectorSize
+                                    )
+                                )
+                           ) {
+/*   				fprintf(stderr, "chain End=%ld\n", chainCurrent);   */
+				break;
+			}
 /* 			fprintf(stderr, "chainCurrent=%ld\n", chainCurrent); */
 			e->blocks[e->numOfBlocks++] = chainCurrent;
 			if (e->numOfBlocks >= chainMaxLen) {
@@ -353,15 +370,6 @@ FILE *ole_readdir(FILE *f) {
 				chainCurrent = getlong(SBD, chainCurrent*4);
 			} else {
 				chainCurrent=-1;
-			}
-			if(chainCurrent <= 0 ||
-			   chainCurrent >= ( e->isBigBlock ?
-								 ((bbdNumBlocks*sectorSize)/4)
-								 : ((sbdNumber*shortSectorSize)/4) ) ||
-			   (e->numOfBlocks >
-				e->length/(e->isBigBlock ? sectorSize : shortSectorSize))) {
-/*   				fprintf(stderr, "chain End=%ld\n", chainCurrent);   */
-				break;
 			}
 		}
 	}

@@ -147,11 +147,9 @@ void process_item (int rectype, int reclen, unsigned char *rec) {
 		exit(69);
 		break;
 	}
-	case WRITEPROT: {
-		fprintf(stderr,"File is write protected\n");
+	case WRITEPROT: 
+		/* File is write protected, but we only read it */
 		break;
-	}
-		
 	case 0x42: {
 		if (source_charset) break;
 		codepage=getshort(rec,0);
@@ -545,20 +543,20 @@ int BuiltInDateFormatIdx (int index) {
 	/* 0 is used as false -- format not found */
 	if ((index>= 0x0E) && (index<=0x16)) {
 		return offset+index-0x0E;
-	} else 	
+	} else {
 		if ((index>=0x2d) && (index<=0x2F)) {
 			return offset+index-0x2d+9;
-		} else if (index==0xa4) {	
-			return 12+offset;
-		} else 	
+		} else { 	
 			return 0;
+		}
+	}
 }	
 
 /* 
  * GetBuiltInDateFormat stores and returns
  * built in xls2csv strftime formats.
  */
-#define NUMOFDATEFORMATS 13
+#define NUMOFDATEFORMATS 12
 char *GetBuiltInDateFormat(int dateindex) {
 	static char *formats[]={
 		/* reserved  */ NULL, /* BuiltInDateFormatIdx use dateindex=0 as flag format not found */
@@ -574,7 +572,9 @@ char *GetBuiltInDateFormat(int dateindex) {
 		/* 0x2d */ "%M:%S",		/* 10 */
 		/* 0x2e */ "%H:%M:%S",		/* 11 */
 		/* 0x2f */ "%M:%S",		/* 12 */
+#if 0
 		/* 0xa4 */ "%m.%d.%Y %l:%M:%S %p"	/* 13 */
+#endif
 	};
 	if (dateindex>0 && dateindex <= NUMOFDATEFORMATS) {
 	  return formats[dateindex];
@@ -726,11 +726,11 @@ char* format_rk(unsigned char *rec,short int format_code) {
 # ifdef WORDS_BIGENDIAN     
 		for(s=rec+4,d=dconv.cc,i=0; i<4;i++) 
 			*(d++)=*(--s);
-		dconv.cc[0]=dconv.cc[0] & 0xfc;
+		dconv.cc[3]=dconv.cc[3] & 0xfc;
 # else       
 		for(s=rec,d=dconv.cc+4,i=0;
 				i<4;i++) *(d++)=*(s++);
-		dconv.cc[3]=dconv.cc[3] & 0xfc;
+		dconv.cc[4]=dconv.cc[4] & 0xfc;
 # endif     
 		value=dconv.d;
 	}
