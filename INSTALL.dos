@@ -41,21 +41,21 @@ downloaded from http://community.borland.com/museum. You can get the
 same one. 
 
 I've made some attempts to compile catdoc with Watcom C (16-bit),
-but haven't completely socceeded. If you do, let me know.   
+but haven't completely succeeded. If you do, let me know.   
 
-1. With 16-bit compilier, use COMPACT memory model
+1. With 16-bit compiler, use COMPACT memory model
    If you are using Turbo C make -fmakefile.tc in src directory
    should be enough.  If you have to change anything  in
    the makefile.tc, please let me know.
    
 2. If you are using compilier other than Turbo C /Borland C or
    Watcom,  you should take look on fileutil.c file and possible
-   add couple of #ifdefs  here. If your succed with it, send me a
+   add couple of #ifdefs  here. If your succeed with it, send me a
    patch  (or entire modified file, if you don't know how to make
    a good unix-like patch). 
 
 
-3. With 32-bit compilier you are on your own. I don't think that
+3. With 32-bit compiler you are on your own. I don't think that
   small utilities like catdoc should require extender or DPMI host,
   so I've never tried to build 32-bit version of catdoc for DOS,
   But if you mix buffer sizes from UNIX version and file-name
@@ -66,11 +66,11 @@ but haven't completely socceeded. If you do, let me know.
    and unistd.h which is provided in compat directory.
    Compile getopt.c and add it to cc.lib and put unistd.h in
    your include directory. Later it might help you to port other
-   unix software. With other compilier you can also make use
+   unix software. With other compiler you can also make use
    of getopt.c in compat directory (which is from GNU), but I was
    unable to make it work with Watcom 10.0
 
 5. It is probably good idea to link wildargs.obj (or wildargv.obj)
-   with catdoc. I didn't do it myself becouse I use korn shell on
+   with catdoc. I didn't do it myself because I use korn shell on
    machine where I've developed catdoc, so I don't need to include
    parameter expansion in program.
