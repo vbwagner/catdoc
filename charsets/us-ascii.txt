@@ -1,6 +1,105 @@
 #
-#	Name:             US-ASCII\ to Unicode
-#	Unicode version:  1.1
+#	Name:             ANSI X3.4-1968 (US-ASCII) with 0x60/0x27 as
+#	                  left/right single quotation mark to Unicode
+#	Unicode version:  3.2
+#	Table version:    1.0
+#	Table format:     Format A
+#	Date:             2003 April 8
+#	Authors:          Markus Kuhn <http://www.cl.cam.ac.uk/~mgk25/>
+#
+#	General notes:
+#
+#	The coded character set commonly known as "American Standard
+#	Code for Information Interchange (ASCII)" originated in the
+#	early 1960s international standardization project that led to
+#	ECMA-6 (1965) and ISO 646 (1972). When the American National
+#	Standards Institute adopted this specification as national
+#	standard X3.4 in 1968, it added a national provision for
+#	overloading the code positions 0x60 and 0x27 with the
+#	typographic characters left and right single quotation mark.
+#	This usage was not reflected in the international standard and
+#	other national adoptions of it, but become widely used in some
+#	communities in the United States and is now found in numerous
+#	historic and still even some contemporary English-language
+#	7-bit ASCII text files. The Unicode Standard followed
+#	explicitly the international standard, in which 0x27 encodes
+#	the directionally neutral (vertical) character that is used as
+#	both an opening and closing quotation mark as well as an
+#	apostrophe on traditional typewriters, and where 0x60 is a
+#	spacing grave accent that matches the spacing acute accent
+#	found in ISO 8859-1 on position 0xb4.
+#
+#	To facilitate the correct display and conversion of such ASCII
+#	documents with directional quotation marks to Unicode, this
+#	encoding table defines a 7-bit coded character set mapping
+#	that differs from ISO 646-IRV in that the characters 0x60 and
+#	0x27 are mapped to Unicode's typographic directional quotation
+#	marks on U+2018 and U+2019, respectively.
+#
+#	Notes:
+#
+#	  - This historic ASCII interpretation is also used in the left
+#	    half of the PostScript StandardEncoding and (erroneously)
+#	    ISOLatin1Encoding encoding vectors.
+#
+#	  - Unicode features a SINGLE HIGH-REVERSED-9 QUOTATION MARK
+#	    (U+201B), whose provided example glyph has a slightly
+#	    closer ressemblance to the compromise glyphs found in many
+#	    historic US-ASCII fonts that try to represent both a left
+#	    quotation mark and a grave accent. However, since U+201B
+#	    is not actually intended to encode correct English
+#	    typographic quotation conventions, this table maps 0x60 to
+#	    the the correct English opening quotation mark U+2018
+#	    instead (as did PostScript).
+#
+#	References:
+#
+#	  - Markus Kuhn: ASCII and Unicode quotation marks.
+#	    http://www.cl.cam.ac.uk/~mgk25/ucs/quotes.html
+#
+#	  - Jukka Korpela: Character histories: notes on some Ascii
+#	    code positions.
+#	    http://www.cs.tut.fi/~jkorpela/latin1/ascii-hist.html
+#
+#	Format:  Three tab-separated columns
+#		 Column #1 is the ANSI X3.4 code (in hex as 0xXX)
+#		 Column #2 is the Unicode (in hex as 0xXXXX)
+#		 Column #3 the Unicode name (follows a comment sign, '#')
+#
+#	The entries are in ANSI X3.4 order.
+#
+0x00	0x0000	#	NULL
+0x01	0x0001	#	START OF HEADING
+0x02	0x0002	#	START OF TEXT
+0x03	0x0003	#	END OF TEXT
+0x04	0x0004	#	END OF TRANSMISSION
+0x05	0x0005	#	ENQUIRY
+0x06	0x0006	#	ACKNOWLEDGE
+0x07	0x0007	#	BELL
+0x08	0x0008	#	BACKSPACE
+0x09	0x0009	#	HORIZONTAL TABULATION
+0x0A	0x000A	#	LINE FEED
+0x0B	0x000B	#	VERTICAL TABULATION
+0x0C	0x000C	#	FORM FEED
+0x0D	0x000D	#	CARRIAGE RETURN
+0x0E	0x000E	#	SHIFT OUT
+0x0F	0x000F	#	SHIFT IN
+0x10	0x0010	#	DATA LINK ESCAPE
+0x11	0x0011	#	DEVICE CONTROL ONE
+0x12	0x0012	#	DEVICE CONTROL TWO
+0x13	0x0013	#	DEVICE CONTROL THREE
+0x14	0x0014	#	DEVICE CONTROL FOUR
+0x15	0x0015	#	NEGATIVE ACKNOWLEDGE
+0x16	0x0016	#	SYNCHRONOUS IDLE
+0x17	0x0017	#	END OF TRANSMISSION BLOCK
+0x18	0x0018	#	CANCEL
+0x19	0x0019	#	END OF MEDIUM
+0x1A	0x001A	#	SUBSTITUTE
+0x1B	0x001B	#	ESCAPE
+0x1C	0x001C	#	FILE SEPARATOR
+0x1D	0x001D	#	GROUP SEPARATOR
+0x1E	0x001E	#	RECORD SEPARATOR
+0x1F	0x001F	#	UNIT SEPARATOR
 0x20	0x0020	#	SPACE
 0x21	0x0021	#	EXCLAMATION MARK
 0x22	0x0022	#	QUOTATION MARK
@@ -8,7 +107,7 @@
 0x24	0x0024	#	DOLLAR SIGN
 0x25	0x0025	#	PERCENT SIGN
 0x26	0x0026	#	AMPERSAND
-0x27	0x0027	#	APOSTROPHE
+0x27	0x2019	#	RIGHT SINGLE QUOTATION MARK
 0x28	0x0028	#	LEFT PARENTHESIS
 0x29	0x0029	#	RIGHT PARENTHESIS
 0x2A	0x002A	#	ASTERISK
@@ -65,7 +164,7 @@
 0x5D	0x005D	#	RIGHT SQUARE BRACKET
 0x5E	0x005E	#	CIRCUMFLEX ACCENT
 0x5F	0x005F	#	LOW LINE
-0x60	0x0060	#	GRAVE ACCENT
+0x60	0x2018	#	LEFT SINGLE QUOTATION MARK
 0x61	0x0061	#	LATIN SMALL LETTER A
 0x62	0x0062	#	LATIN SMALL LETTER B
 0x63	0x0063	#	LATIN SMALL LETTER C
@@ -96,3 +195,4 @@
 0x7C	0x007C	#	VERTICAL LINE
 0x7D	0x007D	#	RIGHT CURLY BRACKET
 0x7E	0x007E	#	TILDE
+0x7F	0x007F	#	DELETE
