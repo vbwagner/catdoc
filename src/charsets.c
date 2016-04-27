@@ -22,7 +22,7 @@ CHARSET target_charset;
 /* Converts char in input charset into unicode representation           */
 /* Should be converted to macro                                         */
 /************************************************************************/
-int to_unicode (short int *charset, int c) {
+int to_unicode (uint16_t *charset, int c) {
 	return charset[c];
 }
 /************************************************************************/
@@ -70,10 +70,10 @@ CHARSET make_reverse_map(short int *charset) {
 /* Reads charset file (as got from ftp.unicode.org) and returns array of*/
 /* 256 short ints (malloced) mapping from charset t unicode             */
 /************************************************************************/
-short int * read_charset(const char *filename) {
+uint16_t * read_charset(const char *filename) {
 	char *path;
 	FILE *f;
-	short int *new;
+	uint16_t *new;
 	int c;
 	long int uc;
 	path= find_file(stradd(filename,CHARSET_EXT),charset_path);
@@ -181,7 +181,7 @@ int get_utf8 (FILE *f,long *offset,long fileend) {
 		return 0xfeff; /*skip corrupted sequebces*/
 	if (c <0xE0) {
 		if (catdoc_read(buf+1, 1, 1, f)<=0) return EOF;
-		return ((c & 0x1F)<<6 | ((char)buf[1] & 0x3F));
+		return (((c & 0x1F)<<6) | ((char)buf[1] & 0x3F));
 	}
 	if (c <0xF0) {
 		if (catdoc_read(buf+1, 1, 2, f)<=2) return (int)EOF;
@@ -252,7 +252,7 @@ char *to_utf8(unsigned int uc) {
 }    
 
 struct cp_map {
-	int codepage;
+	uint16_t codepage;
 	char *charset_name;
 };
 

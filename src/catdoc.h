@@ -205,10 +205,10 @@ extern int get_8bit_char (FILE *f,long *offset,long fileend);
 extern int get_word8_char (FILE *f,long *offset,long fileend);
 
 extern const char *charset_from_codepage(unsigned int codepage);
-extern  short int *read_charset(const char *filename);
+extern  uint16_t *read_charset(const char *filename);
 extern CHARSET make_reverse_map (short int *charset);
 
-extern int to_unicode (short int *charset, int c) ;
+extern int to_unicode (uint16_t *charset, int c) ;
 
 extern int from_unicode (CHARSET charset, int u) ;
 
