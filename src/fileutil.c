@@ -99,19 +99,18 @@ char *find_file(char *name, const char *path)
 /************************************************************************/
 int check_charset(char **filename,const char *charset) {
 	char *tmppath;
+	if (charset == NULL ) {
+		return 0;
+	}
 	if (!strncmp(charset,"utf-8",6)) {
 		*filename=strdup("utf-8");
 		return 1;
 	}   
 	tmppath=find_file(stradd(charset,CHARSET_EXT),charset_path);
-	/* Some compilers evalate both arguments of && before
-	   applying, so let's not use && as in the shell */
-	if (tmppath) {
-	    if (*tmppath) {
+	if (tmppath && *tmppath) {
 			*filename=strdup(charset);
 			free(tmppath);
 			return 1;
-		}
 	}
 	return 0;
 }

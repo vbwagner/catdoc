@@ -69,7 +69,7 @@ CHARSET make_reverse_map(short int *charset) {
 /************************************************************************/
 /* Reads charset file (as got from ftp.unicode.org) and returns array of*/
 /* 256 short ints (malloced) mapping from charset t unicode             */
-/************************************************************************/int * read_charset(const char *filename) {
+/************************************************************************/
 uint16_t * read_charset(const char *filename) {
 	char *path;
 	FILE *f;
