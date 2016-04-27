@@ -51,7 +51,8 @@ SUBSTMAP read_substmap(char* filename) {
 	}
 	f=fopen(path,"rb");
 	if (!f) {
-		perror("catdoc");
+		perror(path);
+		free(map);
 		return NULL;
 	}
 	if (input_buffer)
