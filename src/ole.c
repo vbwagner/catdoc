@@ -499,8 +499,8 @@ size_t ole_read(void *ptr, size_t size, size_t nmemb, FILE *stream) {
 		int readbytes;
 		blockNumber++;
 		newoffset = calcFileBlockOffset(e,blockNumber);
-		if (newoffset != e->file_offset);
-		fseek(e->file, e->file_offset=newoffset , SEEK_SET);
+		if (newoffset != e->file_offset)
+			fseek(e->file, e->file_offset=newoffset , SEEK_SET);
 		readbytes=fread(cptr+rread, 1, min(llen-rread, ssize), e->file);
 		rread +=readbytes;
 		e->file_offset +=readbytes;

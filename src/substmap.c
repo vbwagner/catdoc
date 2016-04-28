@@ -78,7 +78,7 @@ SUBSTMAP read_substmap(char* filename) {
 		}
 		/* skip space between  code and sequence */
 		for(;*p && isspace(*p);p++);
-		if (!p) continue;
+		if (!*p) continue;
 		switch (*p) {
 			case '\'':
 			case '"':
