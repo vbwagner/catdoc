@@ -24,10 +24,10 @@ all:
 
 dosdoc: catdoc.txt catdoc.ps xls2csv.txt xls2csv.ps catppt.txt catppt.ps
 clean:
-	$(RM) -f catppt.txt catppt.ps catppt.1 \
-            catdoc.1 catdoc.txt catdoc.ps \
-            xls2csv.1 xls2csv.txt xls2csv.ps \
-            wordview.1 wordview.txt wordview.ps build
+	$(RM) catppt.txt catppt.ps  \
+            catdoc.txt catdoc.ps \
+            xls2csv.txt xls2csv.ps \
+            wordview.txt wordview.ps build
 install: @installtargets@
 install-catdoc: catdoc.1 xls2csv.1 catppt.1
 	../mkinstalldirs $(installroot)$(mandir)
@@ -38,4 +38,5 @@ install-wordview:
 	../mkinstalldirs $(installroot)$(mandir)
 	$(INSTALL) -m 644 wordview.1 $(installroot)$(mandir)/man1/wordview.1
 distclean: clean
-	rm Makefile
+	$(RM)  Makefile catdoc.1 xls2csv.1 catppt.1 wordview.1
+
