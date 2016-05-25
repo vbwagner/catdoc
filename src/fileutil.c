@@ -111,7 +111,7 @@ int check_charset(char **filename,const char *charset) {
 			*filename=strdup(charset);
 			free(tmppath);
 			return 1;
-	}
+	} 
 	return 0;
 }
 

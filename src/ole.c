@@ -74,6 +74,7 @@ FILE* ole_init(FILE *f, void *buffer, size_t bufSize)  {
 				ret=fwrite(buffer, 1, bufSize, newfile);
 				if(ret != bufSize) {
 					perror("Can't write to tmp file");
+					fclose(newfile);
 					return NULL;
 				}
 			}

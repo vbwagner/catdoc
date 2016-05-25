@@ -99,6 +99,7 @@ uint16_t * read_charset(const char *filename) {
 			if (c<0||c>255||uc<0||(uc>0xFEFE&& uc!=0xFFFE)) {
 				fprintf(stderr,"Invalid charset file %s\n",path);
 				fclose(f);
+				free(new);
 				return NULL;
 			}
 			new[c]=uc;
