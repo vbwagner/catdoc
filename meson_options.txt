@@ -1,0 +1,14 @@
+option('build_wordview', type : 'boolean', value : true,
+	description : 'Build Tcl/Tk wordview')
+
+option('wish_path', type : 'string', value : '/usr/bin/env wish',
+	description : 'Path to wish interpreter')
+
+option('input_charset', type : 'string', value : 'cp1251',
+	description : 'Input charset')
+
+option('output_charset', type : 'string', value : 'koi8-r',
+	description : 'Output charset')
+
+option('use_langinfo', type : 'boolean', value : true,
+	description : 'Use langinfo to determine current charset')

@@ -7,10 +7,6 @@
 #ifndef CATDOC_H
 #define CATDOC_H
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #ifdef HAVE_STDINT_H
 #include <stdint.h>
 #else
@@ -76,13 +72,6 @@ char *add_exe_path(const char* name);
 #  define USERRC ".catdocrc"
 # endif
 
-# ifndef SYSTEMRC
-#  define SYSTEMRC "/usr/local/lib/catdoc/catdocrc"
-# endif
-
-# ifndef CHARSETPATH
-#  define CHARSETPATH "/usr/local/lib/catdoc"
-# endif
 /* Macro to add executable directory in place of %s in path.
    Not usable in Unix, where executable can have more then one
    link and configuration files are usially kept separately   from executables
@@ -99,40 +88,13 @@ char *add_exe_path(const char* name);
 # define CHARSET_EXT ".txt"
 #endif
 
-/* Default charsets */
-#ifndef TARGET_CHARSET
-#if defined(__MSDOS__) || defined(_WIN32)
-#define TARGET_CHARSET "cp866"
-#else
-#define TARGET_CHARSET "koi8-r"
+#ifndef SPEC_EXT
+# define SPEC_EXT ".specchars"
 #endif
+#ifndef REPL_EXT
+# define REPL_EXT ".replchars"
 #endif
 
-#ifndef SOURCE_CHARSET
-#define SOURCE_CHARSET "cp1251"
-#endif
-
-#ifndef UNKNOWN_CHAR
-#define UNKNOWN_CHAR "?"
-#endif
-/* On MS-DOS and WIN32 files have to have 3-char extension */
-#if defined(__MSDOS__) || defined(_WIN32)
-# ifndef SPEC_EXT
-#  define SPEC_EXT ".spc"
-# endif
-# ifndef REPL_EXT 
-#  define REPL_EXT ".rpl"
-# endif
-#else
-
-/* On other system we'll rename them to something more readable */
-# ifndef SPEC_EXT
-#  define SPEC_EXT ".specchars"
-# endif
-# ifndef REPL_EXT
-#  define REPL_EXT ".replchars"
-# endif
-#endif
 #if defined(__MSDOS__) && !defined(__DJGPP__)
 /* Buffer sizes for 16-bit DOS progran */
 #define PARAGRAPH_BUFFER 16384

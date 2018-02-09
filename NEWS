@@ -1,3 +1,6 @@
+   0.96 Xxx nn 2018
+	Replace autotools build system with meson build.
+
    0.95 May 25 2016
 	Replaced charset tables with new ones, published by Unicode Consortium with
     more permissive license.

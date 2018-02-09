@@ -4,9 +4,6 @@
 /* This file is part of catdoc project                           */
 /* (c) Victor Wagner 1996-2003, (c) Alex Ott 2003	             */
 /*****************************************************************/
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
 #include <string.h>
 #include <stdio.h>
 #include "catdoc.h"
