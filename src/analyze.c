@@ -4,9 +4,6 @@
   This file is released under the GPL.  Details can be
   found in the file COPYING accompanying this distribution.
 */
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
 #include <stdio.h>
 #include <limits.h>
 #include <stdlib.h>

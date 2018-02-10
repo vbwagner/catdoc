@@ -1,9 +1,9 @@
-# -* wish *-
+#!@wish_path@
 # fallback which allows me to run wordview.tcl without doing make
 package require Tcl 8.3
 
 if ![info exist charset_lib] {
-  set charset_lib /usr/local/lib/catdoc
+  set charset_lib @charset_dir@
 }
 option add *Text.Font {Courier 11} widgetDefault
 option add *Text.Background white widgetDefault

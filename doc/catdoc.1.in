@@ -86,7 +86,7 @@ extension.
 CHARACTER SETS below and should have 
 .B .txt
 extension  and reside in 
-.B catdoc library directory ( @libdir@/catdoc). By default, current
+.B catdoc library directory (@charset_dir@). By default, current
 locale charset is used if langinfo support compiled in.
 .TP 8
 .BI -f format
@@ -233,12 +233,11 @@ can be used in these string.
 
 
 .SH RUNTIME CONFIGURATION
-Upon startup catdoc reads its system-wide configuration file (
-.B catdocrc in 
-.B catdoc
-library directory) and then
+Upon startup catdoc reads its system-wide configuration file
+.B @charset_dir@/catdocrc
+and then
 user-specific configuration file
-.BR ${HOME}/.catdocrc.
+.BR ${HOME}/.catdocrc .
 .PP
 These files can contain following directives:
 .TP 8
