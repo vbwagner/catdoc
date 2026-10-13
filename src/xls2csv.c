@@ -146,6 +146,7 @@ int main(int argc, char *argv[])
 			help();
 			exit(0);
 		}    
+		set_std_func();
 		do_table(stdin,"STDIN");
 		exit (0);
 	}	
